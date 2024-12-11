@@ -1,0 +1,287 @@
+/* Overlay styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.overlay-content {
+    width: 80%;
+    height: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-left: 200px;
+}
+
+.an {
+    display: none !important;
+}
+
+/* ---------------- */
+.input {
+    position: relative;
+    max-width: 190px;
+    border: none;
+    box-shadow: 0px 1.5px 0px 0px #858585;
+    padding: 0.5rem;
+    transition: all 200ms ease-in-out;
+    opacity: 0.8;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    font-size: 0.625rem;
+    font-weight: bold;
+    color: #858585;
+    margin-bottom: 4px;
+    margin-left: 1px;
+}
+
+.input-helper {
+    color: #858585;
+    font-size: 0.5rem;
+    margin-top: 6px;
+    margin-left: 1px;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: all 100ms linear;
+    z-index: -1;
+}
+
+.input::placeholder {
+    color: rgb(145, 145, 145);
+    font-size: 0.75rem;
+}
+
+.input::after {
+    content: attr(placeholder);
+    position: absolute;
+    color: #161616;
+    top: 0;
+    left: 0;
+}
+
+.input:focus {
+    border: none;
+    box-shadow: 0px 1.5px 0px 0px #72e985;
+    outline: none;
+}
+
+.input:focus + .input-helper {
+    visibility: visible;
+    transform: translateY(0rem);
+}
+
+.input:focus::placeholder {
+    visibility: hidden;
+}
+
+/* ---------- */
+
+.container-btn-file {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-color: #307750;
+    color: #fff;
+    border-style: none;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 4px 8px 10px -3px rgba(0, 0, 0, 0.356);
+    transition: all 250ms;
+}
+
+.container-btn-file input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.container-btn-file > svg {
+    margin-right: 1em;
+}
+
+.container-btn-file::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0;
+    border-radius: 0.5em;
+    background-color: #469b61;
+    z-index: -1;
+    transition: all 350ms;
+}
+
+.container-btn-file:hover::before {
+    width: 100%;
+}
+
+.form-label {
+    font-size: 16px;
+    /* Tùy chỉnh kích thước */
+}
+
+.input-group-users {
+    display: flex;
+    align-items: center;
+}
+
+.input-group-users .form-control-user {
+    flex-grow: 1;
+    /* Đảm bảo input chiếm không gian còn lại */
+}
+
+.input-group-users .btn-save {
+    border: none;
+    background-color: transparent;
+    padding-left: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    left: -20px;
+}
+
+/* ---------- */
+.tabs {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    box-shadow:
+        0 0 1px 0 rgba(24, 94, 224, 0.15),
+        0 6px 12px 0 rgba(24, 94, 224, 0.15);
+    padding: 0.75rem;
+    padding-bottom: 5px;
+    border-radius: 99px;
+    margin-top: 5px;
+}
+
+.tabs * {
+    z-index: 2;
+}
+
+.container input[type="radio"] {
+    display: none;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 110px;
+    font-size: 0.8rem;
+    color: black;
+    font-weight: 500;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: color 0.15s ease-in;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.8rem;
+    height: 0.8rem;
+    position: absolute;
+    top: 10px;
+    left: 30%;
+    font-size: 10px;
+    margin-left: 0.75rem;
+    border-radius: 50%;
+    margin: 0px;
+    background-color: #e6eef9;
+    transition: 0.15s ease-in;
+}
+
+.container input[type="radio"]:checked + label {
+    color: #185ee0;
+}
+
+.container input[type="radio"]:checked + label > .notification {
+    background-color: #185ee0;
+    color: #fff;
+    margin: 0px;
+}
+
+.container input[id="radio-1"]:checked ~ .glider {
+    transform: translateX(0);
+}
+
+.container input[id="radio-2"]:checked ~ .glider {
+    transform: translateX(100%);
+}
+
+.container input[id="radio-3"]:checked ~ .glider {
+    transform: translateX(200%);
+}
+
+.glider {
+    position: absolute;
+    display: flex;
+    height: 30px;
+    width: 110px;
+    background-color: #e6eef9;
+    z-index: 1;
+    border-radius: 99px;
+    transition: 0.25s ease-out;
+}
+
+@media (max-width: 700px) {
+    .tabs {
+        transform: scale(0.6);
+    }
+}
+
+/* ------------------------ */
+
+.hr-text {
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: 0.5;
+    font-size: 20px;
+    &:before {
+        content: "";
+        background: linear-gradient(to right, transparent, #818078, transparent);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+    }
+    &:after {
+        content: attr(data-content);
+        position: relative;
+        display: inline-block;
+        color: black;
+
+        padding: 0 0.5em;
+        line-height: 1.5em;
+        color: #000000;
+        background-color: #fcfcfa;
+    }
+}

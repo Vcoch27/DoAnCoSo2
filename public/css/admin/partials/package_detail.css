@@ -1,0 +1,16 @@
+.question-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia thành 2 cột */
+    gap: 20px; /* Khoảng cách giữa các câu hỏi */
+    list-style-type: none; /* Xóa dấu chấm đầu dòng */
+    padding: 0;
+}
+
+.question-list li {
+    margin-bottom: 15px;
+}
+
+.question-list ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}

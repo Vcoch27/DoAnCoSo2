@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+.packages-part {
+    font-family: "Lexend", sans-serif;
+    line-height: 1.5;
+    /* min-height: 100vh; */
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: #393232;
+}
+
+@media (min-width: 780px) {
+    .packages-part {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 1000px) {
+    .packages-part {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1240px) {
+    .packages-part {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.packages-part img {
+    max-width: 100%;
+    display: block;
+}
+
+.card-list {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow:
+        0 0 0 1px rgba(#000, 0.05),
+        0 20px 50px 0 rgba(#000, 0.1);
+    border-radius: 15px;
+    padding: 1.25rem;
+    position: relative;
+    transition: 0.15s ease-in;
+}
+.card:hover,
+.card:focus-within {
+    box-shadow:
+        0 0 0 2px #16c79a,
+        0 10px 60px 0 rgba(#000, 0.1);
+}
+.card-image {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-header a {
+    font-weight: 600;
+    line-height: 1.25;
+    padding-right: 1rem;
+    text-decoration: none;
+    color: inherit;
+    will-change: transform;
+
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+.icon-button {
+    border: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    transition: 0.25s ease;
+    box-shadow:
+        0 0 0 1px rgba(#000, 0.05),
+        0 3px 8px 0 rgba(#000, 0.15);
+    z-index: 1;
+    cursor: pointer;
+    color: #565656;
+}
+.icon-button svg {
+    width: 1em;
+    height: 1em;
+}
+
+.icon-button:hover,
+.icon-button:focus {
+    background-color: #ec4646;
+    color: #fff;
+}
+
+.card-footer {
+    margin-top: 1.25rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+.card-meta {
+    display: flex;
+    align-items: center;
+    color: #787878;
+}
+/* .card-meta:first-child:after {
+    display: block;
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentcolor;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+} */
+
+.card-meta svg {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.25em;
+}
+.hidden {
+    display: none;
+}
+.point {
+    display: block;
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: currentcolor;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.card-packages:hover {
+    border: #129e05 solid 1px;
+}
+.premium-div {
+    line-height: 0;
+    position: relative;
+}
+.premium-logo {
+    position: absolute; /* Positions relative to .card-packages */
+    top: 20px; /* Aligns to the top of .card-packages */
+    right: -10px; /* Aligns to the right of .card-packages */
+    font-size: 35px;
+    line-height: 0;
+    color: rgb(23, 99, 0);
+}
+.premium-logo::before {
+    top: 30px;
+}
+.profile-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    position: relative;
+}
+a {
+    text-decoration: none;
+}
+
+/* Cố định button ở góc trên trái */
+.wrapper {
+    position: relative;
+}
+
+.button-container {
+    position: fixed;
+    top: 10px; /* Khoảng cách từ trên */
+    left: 10px; /* Khoảng cách từ trái */
+    display: flex;
+    align-items: center; /* Canh giữa theo chiều dọc */
+    justify-content: flex-start; /* Canh các button sang trái */
+    gap: 10px; /* Khoảng cách giữa các button */
+    z-index: 1000; /* Đảm bảo button nằm trên cùng */
+}
+
+/* Kiểu dáng cho button */
+.btn-back {
+    display: flex;
+    align-items: center;
+    background-color: #4caf50; /* Màu nền của button */
+    color: white; /* Màu chữ */
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 5px; /* Bo tròn các góc của button */
+}
+
+.btn-back svg {
+    margin-right: 8px; /* Khoảng cách giữa icon và text */
+}
+
+.btn-back:hover {
+    background-color: #f7f7f7; /* Màu nền khi hover */
+    color: #000;
+}
+
+/* From Uiverse.io by Jedi-hongbin */
+.btn-back {
+    display: flex;
+    height: 3em;
+    max-width: 100px;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #9997ff;
+    position: sticky;
+    top: 0;
+}
+
+.btn-back > svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.btn-back:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.btn-back:hover {
+    box-shadow:
+        9px 9px 33px #d1d1d1,
+        -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+.tag {
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: rgba(159, 255, 96, 0.384);
+}

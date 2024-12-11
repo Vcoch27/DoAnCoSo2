@@ -1,0 +1,268 @@
+@import "https://unpkg.com/open-props";
+
+:root {
+    --background-dark: #2d3548;
+    --text-light: rgba(255, 255, 255, 0.6);
+    --text-lighter: rgba(255, 255, 255, 0.9);
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 64px;
+    --width-container: 1200px;
+}
+
+/* * {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+body {
+    height: 100%;
+}
+
+.hero-section {
+    align-items: flex-start;
+    display: flex;
+    min-height: 100%;
+    justify-content: center;
+    padding: 20px var(--spacing-l);
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: var(--spacing-l);
+    grid-row-gap: var(--spacing-l);
+    max-width: var(--width-container);
+    width: 100%;
+    /* filter: brightness(0.5) contrast(1.3) blur(10px); */
+}
+
+@media (min-width: 330px) {
+    .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 630px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 940px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1240px) {
+    .card-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* @media (min-width: 1240px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 2fr);
+    }
+} */
+.card {
+    list-style: none;
+    position: relative;
+}
+
+.card:before {
+    content: "";
+    display: block;
+    padding-bottom: 150%;
+    width: 100%;
+}
+
+.card__background {
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--spacing-l);
+    bottom: 0;
+    filter: brightness(0.75) saturate(1.2) contrast(0.85);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-origin: center;
+    transform: scale(1) translateZ(0);
+    transition:
+        filter 200ms linear,
+        transform 200ms linear;
+    border-radius: revert;
+}
+.card__background::before {
+    content: ""; /* Thêm một pseudo-element */
+    position: absolute; /* Đặt nó ở trên ảnh */
+    top: 0; /* Bắt đầu từ đỉnh */
+    left: 0; /* Bắt đầu từ trái */
+    right: 0; /* Kéo dài đến phải */
+    bottom: 0; /* Kéo dài đến dưới */
+    background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+    z-index: 1; /* Đặt nó lên trên ảnh */
+}
+.card__content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+    z-index: -1;
+}
+
+.card:hover .card__background {
+    transform: scale(1.05) translateZ(0);
+}
+
+/* .card-grid:hover > .card:not(:hover) .card__background {
+    filter: brightness(0.5) contrast(1.3) blur(10px);
+} */
+
+.card__content {
+    left: 0;
+    padding: var(--spacing-l);
+    position: absolute;
+    top: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+
+    .card__category {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-s);
+        text-transform: uppercase;
+    }
+
+    .card__heading {
+        color: var(--text-lighter);
+        font-size: 1.9rem;
+        text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+        line-height: 1.4;
+    }
+    .card__heading,
+    .card__category,
+    h3,
+    h4,
+    p,
+    h5 {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add shadow for text clarity */
+    }
+    .kk {
+        height: 30%;
+    }
+    /* ----- */
+
+    .star-rating {
+        display: flex;
+        direction: row-reverse; /* Để xếp ngược lại từ phải sang trái */
+        font-size: 1rem; /* Kích thước sao */
+        color: gold; /* Màu vàng cho sao */
+        font-size: 14px;
+    }
+    .star-rating h4 {
+        color: white;
+    }
+    .star-rating h4 span {
+        color: gold;
+    }
+
+    .star-rating i {
+        margin: 0 2px; /* Khoảng cách giữa các sao */
+        padding-top: 3px;
+    }
+    .gap-star {
+        padding-right: 15px;
+    }
+    /* --- */
+    .try-btn {
+        font-family: var(--font-sans);
+        font-weight: var(--font-weight-6);
+        font-size: var(--font-size-5);
+        color: var(--gray-8);
+        background: var(--gray-0);
+        border: 0;
+        padding: 2px 4rem;
+        transform: translateY(calc(var(--y, 0) * 1%)) scale(var(--scale));
+        transition: transform 0.1s;
+        position: relative;
+        margin: 20px 0;
+        width: 90%;
+    }
+
+    .try-btn:hover {
+        --y: -10;
+        --scale: 1.1;
+        --border-scale: 1;
+    }
+    .try-btn:active {
+        --y: 5%;
+        --scale: 0.9;
+        --border-scale: 0.9, 0.8;
+    }
+
+    .try-btn:before {
+        content: "";
+        position: absolute;
+        inset: calc(var(--size-3) * -1);
+        border: var(--size-2) solid var(--gray-0);
+        transform: scale(var(--border-scale, 0));
+        transition: transform 0.125s;
+
+        --angle-one: 105deg;
+        --angle-two: 290deg;
+        --spread-one: 30deg;
+        --spread-two: 40deg;
+        --start-one: calc(var(--angle-one) - (var(--spread-one) * 0.5));
+        --start-two: calc(var(--angle-two) - (var(--spread-two) * 0.5));
+        --end-one: calc(var(--angle-one) + (var(--spread-one) * 0.5));
+        --end-two: calc(var(--angle-two) + (var(--spread-two) * 0.5));
+
+        mask: conic-gradient(
+            transparent 0 var(--start-one),
+            white var(--start-one) var(--end-one),
+            transparent var(--end-one) var(--start-two),
+            white var(--start-two) var(--end-two),
+            transparent var(--end-two)
+        );
+
+        z-index: -1;
+    }
+}
+
+.premium-div {
+    line-height: 0;
+    position: relative;
+}
+.premium-logo {
+    position: absolute; /* Positions relative to .card-packages */
+    top: 20px; /* Aligns to the top of .card-packages */
+    right: -10px; /* Aligns to the right of .card-packages */
+    font-size: 35px;
+    line-height: 0;
+    color: goldenrod;
+}
+.premium-logo::before {
+    top: 30px;
+}
+.tag {
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: rgba(235, 235, 235, 0.384);
+}

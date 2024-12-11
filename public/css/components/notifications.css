@@ -1,0 +1,144 @@
+.card-noti {
+    height: 80px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+    position: absolute;
+    top: 70px;
+    right: -50%;
+    width: 380px;
+    z-index: 999; /* Hiển thị trên các phần tử khác */
+    transition:
+        opacity 1s ease-in-out,
+        top 0.5s; /* Hiệu ứng chuyển đổi mượt */
+}
+.wave {
+    position: absolute;
+    transform: rotate(90deg);
+    left: -31px;
+    top: 32px;
+    width: 80px;
+}
+.success .wave {
+    fill: #04e4003a;
+}
+.info .wave {
+    fill: #4777ff3a;
+}
+.warning .wave {
+    fill: #ffa30d3a;
+}
+.error .wave {
+    fill: #fc0c0c3a;
+}
+
+.icon-container {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: 8px;
+}
+.success.icon-container {
+    background-color: #04e40048;
+}
+.info.icon-container {
+    background-color: #4777ff3a;
+}
+.warning.icon-container {
+    background-color: #ffa30d3a;
+}
+.error.icon-container {
+    background-color: #fc0c0c3a;
+}
+
+.icon {
+    width: 17px;
+    height: 17px;
+}
+.message-text {
+    font-size: 17px;
+    font-weight: 700;
+}
+.success .icon,
+.success .message-text {
+    color: #269b24;
+}
+.info .icon,
+.info .message-text {
+    color: #124fff;
+}
+.warning .icon,
+.warning .message-text {
+    color: #db970e;
+}
+.error .icon,
+.error .message-text {
+    color: #d10d0d;
+}
+
+.message-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.message-text,
+.sub-text {
+    margin: 0;
+    cursor: default;
+}
+
+.sub-text {
+    font-size: 14px;
+    color: #555;
+}
+.cross-icon {
+    width: 18px;
+    height: 18px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Hiệu ứng trượt từ trái */
+.card-noti.show {
+    left: 75%;
+    transform: translateX(0);
+}
+
+/* Các biểu tượng và văn bản bên trong */
+.icon-container {
+    margin-right: 10px;
+}
+
+.message-text-container {
+    flex-grow: 1;
+}
+
+.cross-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    fill: #fff;
+}
+
+/* Hiệu ứng đóng thông báo */
+.card-noti.hide {
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    opacity: 0;
+}
+
+body {
+    position: relative;
+}
