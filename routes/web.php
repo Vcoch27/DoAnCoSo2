@@ -51,7 +51,10 @@ Route::post('/delete-package/{id}', [AdminQuestionPackagesController::class, 'de
 Route::post('/update-public-mode/{id}', [AdminQuestionPackagesController::class, 'updateMode']);
 // Admin Premium Routes
 Route::get('/dashboard/premium', [AdminPremiumController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.premium');
-
+Route::post('/subscriptions/activate/{id}', [AdminPremiumController::class, 'activate'])->name('subscriptions.activate');
+Route::post('/subscriptions/delete/{id}', [AdminPremiumController::class, 'delete'])->name('subscriptions.delete');
+Route::post('/update-subscription', [AdminPremiumController::class, 'updateSubscription']);
+Route::delete('/delete-subscription', [AdminPremiumController::class, 'deleteSubscription']);
 // Admin Public Request Routes
 Route::get('/dashboard/public_requests', [AdminPublicRequestsController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.public_requests');
 Route::post('/get-package-details', [AdminPublicRequestsController::class, 'getPackageDetails'])->name('get-package-details');

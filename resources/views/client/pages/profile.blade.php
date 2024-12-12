@@ -9,7 +9,7 @@
         {{ $user->name}}
     </title>
     <!-- CSS Files -->
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('/css/css1.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/css2.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/components/pagination.css') }}" rel="stylesheet" />
@@ -573,29 +573,6 @@ $owner = Auth::user()->id === $user->id;
             </div>
         </section>
     </div>
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const starRatings = document.querySelectorAll('.star-rating'); // Lấy tất cả star-rating
-
-            starRatings.forEach(starRating => {
-                const rating = parseFloat(starRating.getAttribute('data-rating')); // Lấy giá trị rating từ data-rating
-                const fullStars = Math.floor(rating); // Số sao đầy
-                const halfStar = rating % 1 !== 0; // Kiểm tra có sao nữa không
-
-                // Tạo các sao tương ứng
-                for (let i = 0; i < 5; i++) {
-                    if (i < fullStars) {
-                        starRating.innerHTML += '<i class="fa-solid fa-star"></i>'; // Sao đầy
-                    } else if (i === fullStars && halfStar) {
-                        starRating.innerHTML += '<i class="fa-regular fa-star-half-stroke"></i>'; // Sao nữa
-                    } else {
-                        starRating.innerHTML += '<i class="fa-regular fa-star"></i>'; // Sao trống
-                    }
-                }
-            });
-        });
-    </script> -->
-
 </body>
 
 <script>
@@ -659,11 +636,6 @@ $owner = Auth::user()->id === $user->id;
     var statusMessage = document.getElementById('status-message');
     // Lưu giá trị ban đầu của người dùng
     var initialUsername = usernameInput.value;
-
-
-
-
-
     // Lắng nghe sự kiện thay đổi giá trị trong input
     usernameInput.addEventListener('input', function() {
         if (usernameInput.value !== initialUsername) {

@@ -58,10 +58,11 @@
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0">Total Revenue</p>
-                        <h4 class="mb-0">{{$totalPremiumRevenue}} VND</h4>
-                        <p>Premium Users: <b>{{$totalPremiumUser}}</b></p>
-                        <p>Revenue Last Week: <b>{{$premiumRevenueLastWeek}} VND</b></p>
+                        <h4 class="mb-0">{{ number_format($totalPremiumRevenue, 0, ',', ' ') }} VND</h4>
+                        <p>Premium Users: <b>{{ $totalPremiumUser }}</b></p>
+                        <p>Revenue Last Week: <b>{{ number_format($premiumRevenueLastWeek, 0, ',', ' ') }} VND</b></p>
                     </div>
+
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
