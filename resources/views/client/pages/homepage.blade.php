@@ -16,6 +16,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
+    .highlight {
+        background-color: yellow;
+        color: #000;
+        /* font-weight: bold; */
+    }
+
+    /* /---------------- */
     .select {
         width: fit-content;
         cursor: pointer;
@@ -277,10 +284,10 @@ foreach ($tags as $tag) {
 
             </div>
             <div class="col-md-6">
-                <input style="height: 70%;  " type="text" class="form-control mt-2" placeholder="Search for packages by title, category, or tag">
+                <input id="search-input" style="height: 70%;" type="text" class="form-control mt-2" placeholder="Search for packages by title, category, tag, or author">
             </div>
             <div class="col-md-3">
-                <button style="background-color: #f9f9f9; color: #141420;" class="btn btn-secondary btn-block">Search Results</button>
+                <button id="search-button" style="background-color: #f9f9f9; color: #141420;" class="btn btn-secondary btn-block">Search</button>
             </div>
         </div>
 
@@ -522,6 +529,38 @@ foreach ($tags as $tag) {
                 }
             });
         });
+        // --------------
+
+    });
+    document.getElementById('search-button').addEventListener('click', function() {
+        const searchInput = document.getElementById('search-input');
+        const query = searchInput.value.trim();
+
+        if (query) {
+            // Hiển thị trạng thái đang tải
+            document.getElementById('search-content').innerHTML = '<p>Loading...</p>';
+
+            $.ajax({
+                url: '/search-packages',
+                type: 'GET',
+                data: {
+                    query: query
+                },
+                success: function(response) {
+                    if (response.html) {
+                        document.getElementById('search-content').innerHTML = response.html;
+                    } else {
+                        document.getElementById('search-content').innerHTML = '<p>No results found for your search.</p>';
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while searching. Please try again.');
+                    document.getElementById('search-content').innerHTML = ''; // Xóa trạng thái "Loading..."
+                }
+            });
+        } else {
+            alert('Please enter a search term.');
+        }
     });
 </script>
 @endsection

@@ -69,6 +69,7 @@ Route::get('/packages/{id}/edit', [QuestionPackagesController::class, 'edit'])->
 Route::put('/packages/{id}/update', [QuestionPackagesController::class, 'update'])->name('packages.update');
 Route::post('/submit-questions', [QuestionPackagesController::class, 'submitQuestions'])->name('submit.questions');
 Route::get('/get-packages/{tagId}', [QuestionPackagesController::class, 'getTagPackages']);
+Route::get('/search-packages', [QuestionPackagesController::class, 'searchPackages']);
 
 // ------------------------- Payment Routes -------------------------
 Route::get('/premium', [PaymentController::class, 'showPremium'])->name('premium');

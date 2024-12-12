@@ -502,4 +502,29 @@ class QuestionPackagesController extends Controller
 
         return response()->json(['html' => $html]); // Trả về HTML dưới dạng JSON
     }
+    public function searchPackages(Request $request)
+    {
+        $query = $request->input('query');
+
+        $packages = QuestionPackage::with(['tags', 'author'])
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                    ->orWhere('description', 'like', "%{$query}%");
+            })
+            ->orWhereHas('tags', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+            ->orWhereHas('author', function ($q) use ($query) {
+                $q->where('name', 'like', "%{$query}%");
+            })
+            ->where('public', true)
+            ->orderBy('title', 'asc') // Sắp xếp theo tiêu đề
+            ->get();
+
+        $packagesCount = $packages->count();
+        // Trả về view với HTML được render sẵn
+        $html = view('client.partials.search-content', compact('packages', 'packagesCount', 'query'))->render();
+
+        return response()->json(['html' => $html]);
+    }
 }
