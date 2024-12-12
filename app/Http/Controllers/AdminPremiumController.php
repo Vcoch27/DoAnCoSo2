@@ -11,7 +11,15 @@ class AdminPremiumController extends Controller
     {
         // Lấy dữ liệu từ UserPremiumSubscription kèm theo thông tin liên kết với User và PremiumPlan
         $subscriptions = UserPremiumSubscription::with(['user', 'premiumPlan'])
-            ->paginate(15); // Phân trang 15 bản ghi mỗi trang
+            ->orderByRaw("
+                CASE 
+                    WHEN status = 'pending' THEN 1
+                    WHEN status = 'active' THEN 2
+                    WHEN status = 'expired' THEN 3
+                    ELSE 4
+                END
+            ")
+            ->paginate(15);
 
         return view('admin.pages.user_premium_subscriptions', compact('subscriptions'));
     }

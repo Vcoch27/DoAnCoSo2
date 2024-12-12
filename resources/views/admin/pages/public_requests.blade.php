@@ -63,7 +63,7 @@
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm"> {{ $request->package->title }}</h6>
-                                                <p class="text-xs text-secondary mb-0">ID_Package: {{ $request->id }}</p>
+                                                <p class="text-xs text-secondary mb-0">ID_Package: {{ $request->package->id }}</p>
                                             </div>
                                         </div>
                                     </td>
