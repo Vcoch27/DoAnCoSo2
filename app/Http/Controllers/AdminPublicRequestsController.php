@@ -67,20 +67,27 @@ class AdminPublicRequestsController extends Controller
         ]);
 
         // Tìm gói câu hỏi
-        $questionPackage = QuestionPackage::findOrFail($id);
+        $questionPackage = PublicRequest::findOrFail($id);
 
         // Cập nhật trạng thái public
         $questionPackage->update([
             'status' => 'rejected',
         ]);
 
-        // Tạo thông báo
-        Notification::create([
-            'user_id' => $questionPackage->requested_by, // Người yêu cầu
-            'title' => 'Package Rejected',
-            'message' => $request->input('rejection_message') ?? 'Your question package has been rejected.',
-            'type' => 'error',
-        ]);
+        // Check if requested_by is not null
+        if ($questionPackage->requested_by) {
+            Notification::create([
+                'user_id' => $questionPackage->requested_by,
+                'title' => 'Package Rejected',
+                'message' => $request->input('rejection_message') . '  Your question package has been rejected.',
+                'type' => 'error',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Requested user not found for notification.',
+            ], 400);
+        }
+
 
         return response()->json([
             'message' => 'The package has been rejected successfully.',

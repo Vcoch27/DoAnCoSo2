@@ -65,21 +65,14 @@ class AdminPremiumController extends Controller
 
     public function updateSubscription(Request $request)
     {
-        // Xác thực đầu vào
-        $validated = $request->validate([
-            'appTransId' => 'required|exists:subscriptions,appTransId',
-            'startDate' => 'required|date',
-            'endDate' => 'required|date',
-        ]);
 
         // Cập nhật dữ liệu
-        $subscription = UserPremiumSubscription::where('appTransId', $request->appTransId)->first();
+        $subscription = UserPremiumSubscription::where('app_trans_id', $request->appTransId)->first();
 
         if ($subscription) {
-            $subscription->startDate = $request->startDate;
-            $subscription->endDate = $request->endDate;
+            $subscription->start_date = $request->startDate;
+            $subscription->end_date = $request->endDate;
             $subscription->save();
-
             return response()->json(['success' => true, 'message' => 'Subscription updated successfully']);
         }
 
@@ -89,14 +82,8 @@ class AdminPremiumController extends Controller
     // Xóa subscription
     public function deleteSubscription(Request $request)
     {
-        // Xác thực đầu vào
-        $validated = $request->validate([
-            'appTransId' => 'required|exists:subscriptions,appTransId',
-        ]);
-
         // Xóa dữ liệu
-        $subscription = UserPremiumSubscription::where('appTransId', $request->appTransId)->first();
-
+        $subscription = UserPremiumSubscription::where('app_trans_id', $request->appTransId)->first();
         if ($subscription) {
             $subscription->delete();
             return response()->json(['success' => true, 'message' => 'Subscription deleted successfully']);

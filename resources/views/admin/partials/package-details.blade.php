@@ -99,7 +99,9 @@
                         alert(response.message);
                         $('#package-card-' + requestId).fadeOut(); // Ẩn card sau khi từ chối
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+
                         alert('Failed to reject the package.');
                     },
                 });

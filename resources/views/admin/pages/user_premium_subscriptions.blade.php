@@ -20,7 +20,7 @@
 
     .overlay-content {
         width: 50%;
-        height: 85%;
+        height: 90%;
         background: white;
         padding: 20px;
         border-radius: 5px;
@@ -176,9 +176,6 @@
                                         </div>
                                     </td>
 
-
-
-
                                     <td class="align-middle text-center">
                                         @if ($subscription->status === 'pending')
                                         <!-- Nút xóa và xác nhận chuyển sang active -->
@@ -203,8 +200,6 @@
                                         </a>
                                         @endif
                                     </td>
-
-
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -227,6 +222,7 @@
                         </div>
                         <hr class="hr-text " data-content="Update Subcription">
                         <form id="overlayForm" class="form-container" style="width: 80%; margin: 0 auto;">
+                            <input type="text" id="appTransId" class="form-control" disabled>
                             <div class="form-group">
                                 <label for="appTransId" class="form-label">appTransId</label>
                                 <input type="text" id="appTransId" class="form-control" disabled>
@@ -264,7 +260,7 @@
                             </div>
                             <hr class="hr-text" data-content="Delete Subscription">
                             <div class="form-group">
-                                <a href="javascript:void(0);" class="btn btn-danger btn-sm delete-subscription" id="deleteBtn" style="font-size: 15px;">
+                                <a href="javascript:void(0);" class="btn btn-danger btn-sm " id="deleteBtn" style="font-size: 15px;">
                                     <span>Delete</span>
                                 </a>
                             </div>
@@ -385,66 +381,62 @@
         endDateInput.addEventListener('change', checkChanges);
 
         // Khi nhấn nút Save, thực hiện AJAX để cập nhật thông tin
-        document.getElementById('saveBtn').addEventListener('click', function() {
+        saveBtn.addEventListener('click', () => {
             const appTransId = document.getElementById('appTransId').value;
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
-
-            // Gửi yêu cầu AJAX đến route /update-subscription
-            fetch('/update-subscription', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        appTransId: appTransId,
-                        startDate: startDate,
-                        endDate: endDate
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
+            console.log(startDate);
+            $.ajax({
+                url: '/update-subscription',
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    appTransId: appTransId,
+                    startDate: startDate,
+                    endDate: endDate
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message); // Assuming the response message is already in English
+                        location.reload();
                     } else {
-                        alert(data.message);
+                        alert(response.message); // Assuming the response message is already in English
                     }
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred while updating. Please try again!');
+                }
+            });
         });
 
-        // Khi nhấn nút Delete, xác nhận và thực hiện AJAX để xóa
         deleteBtn.addEventListener('click', () => {
             const appTransId = document.getElementById('appTransId').value;
-
-            // Xác nhận xóa
-            if (confirm('Bạn có chắc chắn muốn xóa bản ghi này?')) {
-                // Thực hiện AJAX để xóa bản ghi
-                fetch('/delete-subscription', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            appTransId: appTransId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Xóa thành công!');
-                            overlay.classList.add('an'); // Đóng overlay sau khi xóa thành công
+            console.log(appTransId);
+            if (confirm('Are you sure you want to delete this record?')) {
+                $.ajax({
+                    url: '/delete-subscription',
+                    method: 'DELETE',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        appTransId: appTransId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Record deleted successfully!');
+                            location.reload();
                         } else {
-                            alert('Xóa thất bại!');
+                            alert('Failed to delete the record!');
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Có lỗi xảy ra khi xóa, vui lòng thử lại!');
-                    });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert('An error occurred while deleting. Please try again!');
+                    }
+                });
             }
         });
+
     });
 </script>
 @endsection

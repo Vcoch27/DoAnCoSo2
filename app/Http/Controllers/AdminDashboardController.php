@@ -61,6 +61,7 @@ class AdminDashboardController extends Controller
             : 0;
 
         $pendingPublicRequests = PublicRequest::where('status', 'pending')->count();
+        $pendingPremiumSubscriptions = UserPremiumSubscription::where('status', 'pending')->count();
 
         $activePage = 'dashboard';
         // Trả về view với dữ liệu
@@ -80,8 +81,8 @@ class AdminDashboardController extends Controller
             'premiumRevenueGrowthRate',
             'totalPremiumUser',
             'pendingPublicRequests',
-            'activePage'
-
+            'activePage',
+            'pendingPremiumSubscriptions'
         ));
     }
 }

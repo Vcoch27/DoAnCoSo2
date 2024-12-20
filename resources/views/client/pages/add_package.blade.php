@@ -22,7 +22,7 @@
 <div class="container my-4" style=" position: relative;">
 
     @if (session('testValue'))
-    <pre>{{ json_encode(json_decode(session('testValue')), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+    <!-- <pre>{{ json_encode(json_decode(session('testValue')), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
     @endif
 
     <form action="{{ route('packages.store') }}" method="post">

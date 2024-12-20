@@ -19,9 +19,13 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
                     <p class="mb-0"><span class="text-success text-sm font-weight-bolder">
-                            @if($publicPackageGrowthRate > 0) +{{$publicPackageGrowthRate}}%
-                            @elseif($publicPackageGrowthRate < 0) {{$publicPackageGrowthRate}}%
-                                @else 0% @endif
+                            @if($publicPackageGrowthRate > 0)
+                            +{{ number_format($publicPackageGrowthRate, 2) }}%
+                            @elseif($publicPackageGrowthRate < 0)
+                                {{ number_format($publicPackageGrowthRate, 2) }}%
+                                @else
+                                0%
+                                @endif
                                 </span> compared to last week</p>
                 </div>
             </div>
@@ -42,10 +46,15 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
                     <p class="mb-0"><span class="text-success text-sm font-weight-bolder">
-                            @if($userGrowthRate > 0) +{{$userGrowthRate}}%
-                            @elseif($userGrowthRate < 0) {{$userGrowthRate}}%
-                                @else 0% @endif
+                            @if($userGrowthRate > 0)
+                            +{{ number_format($userGrowthRate, 2) }}%
+                            @elseif($userGrowthRate < 0)
+                                {{ number_format($userGrowthRate, 2) }}%
+                                @else
+                                0%
+                                @endif
                                 </span> compared to last week</p>
+
                 </div>
             </div>
 
@@ -66,9 +75,10 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3">
-                    <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">
-                            {{$premiumRevenueGrowthRate}}%
+                    <p class="mb-0"><span class=" text-sm font-weight-bolder">
+                            {{$premiumRevenueGrowthRate > 0 ? '+' . number_format($premiumRevenueGrowthRate, 2) : number_format($premiumRevenueGrowthRate, 2)}}%
                         </span> compared to last week</p>
+
                 </div>
             </div>
 
@@ -166,14 +176,30 @@
                     <p class="text-sm">Pending requests: <b>{{ $pendingPublicRequests }}</b></p>
                     <hr class="dark horizontal">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-info btn-sm" href="{{ route('admin.packages') }}">
+                        <a class="btn btn-info btn-sm" href="{{ route('admin.public_requests') }}">
                             View Details
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-md-6 mt-4 mb-4">
+            <div class="card z-index-2">
+                <div class="card-body">
+                    <h6 class="mb-0">Unprocessed User Payments</h6>
+                    <p class="text-sm">Quantity: <b>{{ $pendingPremiumSubscriptions }}</b></p>
+                    <hr class="dark horizontal">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-info btn-sm" href="{{ route('admin.premium') }}">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 
 
 </div>

@@ -359,37 +359,50 @@
                             <label for="name">
                                 <i class="fa-regular fa-user"></i>
                             </label>
-                            <input id="name" name="name" required autofocus autocomplete="name" type="text" placeholder="Name">
+                            <input id="name" name="name" value="{{ old('name') }}" autofocus autocomplete="name" type="text" placeholder="Name">
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
+
                         <div class="input-group">
                             <label for="email">
                                 <i class="fa-solid fa-envelope"></i>
                             </label>
-                            <input type="email" placeholder="Email" type="email" name="email" id="email" required autocomplete="username">
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="username" placeholder="Email">
+                            @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="input-group">
-                            <label for="password"> <i class="fa-solid fa-lock"></i></label>
 
-                            <input id="password" type="password" placeholder="Password" name="password"
-                                required autocomplete="new-password">
-                        </div>
                         <div class="input-group">
-                            <label for="password_confirmation"></label>
-                            <i class="fa-solid fa-lock"></i>
-                            <input id="password_confirmation" name="password_confirmation" type="password" placeholder="Confirm password" required autocomplete="new-password">
+                            <label for="password">
+                                <i class="fa-solid fa-lock"></i>
+                            </label>
+                            <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Password">
+                            @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <button>
-                            Sign up
-                        </button>
+
+                        <div class="input-group">
+                            <label for="password_confirmation">
+                                <i class="fa-solid fa-lock"></i>
+                            </label>
+                            <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" placeholder="Confirm password">
+                            @error('password_confirmation')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <button type="submit">Sign up</button>
+
                         <p>
-                            <span>
-                                Already have an account?
-                            </span>
-                            <b onclick="toggle()" class="pointer">
-                                Sign in here
-                            </b>
+                            <span>Already have an account?</span>
+                            <b onclick="toggle()" class="pointer">Sign in here</b>
                         </p>
                     </form>
+
 
                 </div>
             </div>
@@ -407,18 +420,15 @@
                                 <i class="fa-solid fa-envelope"></i>
 
                             </label>
-                            <input type="email" id="email" placeholder="Email" name="email" required autofocus autocomplete="username">
+                            <input type="email" id="email" placeholder="Email" name="email" autocomplete="username">
                         </div>
                         <div class="input-group">
                             <label for="password">
                                 <i class="fa-solid fa-lock"></i>
                             </label>
                             <input id="password" type="password" placeholder="Password" name="password"
-                                required autocomplete="current-password">
+                                autocomplete="current-password">
                         </div>
-
-
-
                         <button type="submit">
                             Sign in
                         </button>

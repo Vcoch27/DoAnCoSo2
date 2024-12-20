@@ -27,7 +27,7 @@
     @if(session()->has('validated_data'))
     <div>
         <h3>Validated Data:</h3>
-        <pre>{{ json_encode(session('validated_data'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+        <!-- <pre>{{ json_encode(session('validated_data'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
 
     </div>
     @endif
