@@ -347,6 +347,23 @@
     }
 </style>
 <div id="container" class="container">
+    @if(session('alert'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Notice',
+            text: @json(session('alert')),
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
+
+
+
+
+
     <!-- FORM SECTION -->
     <div class="row">
         <!-- SIGN UP -->
@@ -493,14 +510,18 @@
     <!-- END CONTENT SECTION -->
 </div>
 <script>
-    let container = document.getElementById('container')
+    let container = document.getElementById('container');
 
     toggle = () => {
-        container.classList.toggle('sign-in')
-        container.classList.toggle('sign-up')
-    }
+        container.classList.toggle('sign-in');
+        container.classList.toggle('sign-up');
+    };
 
     setTimeout(() => {
-        container.classList.add('sign-in')
-    }, 200)
+        container.classList.add('sign-in');
+    }, 200);
+
+    // Pass the PHP $flag variable into JavaScript
+    let $flag = @json($flag ?? 'login'); // Default to 'login' if not set
+    console.log("Check flag:", $flag);
 </script>

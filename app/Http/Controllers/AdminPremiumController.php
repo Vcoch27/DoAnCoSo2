@@ -22,8 +22,10 @@ class AdminPremiumController extends Controller
                 END
             ")
             ->paginate(15);
+        $premiumPlans = PremiumPlan::all();
 
-        return view('admin.pages.user_premium_subscriptions', compact('subscriptions'));
+
+        return view('admin.pages.user_premium_subscriptions', compact('subscriptions', 'premiumPlans'));
     }
 
     // Phương thức để kích hoạt subscription

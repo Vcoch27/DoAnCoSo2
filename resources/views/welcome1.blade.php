@@ -37,26 +37,20 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
 
-                    @if (Route::has('login'))
-                    @auth
-                    <li><a
-                            href="{{ url('/dashboard') }}">
-                            Dashboard
+                    <li> <a
+                            href="{{ route('login') }}" style="margin-right: 20px;">
+                            Log in
                         </a></li>
-                    @else
-                    <a
-                        href="{{ route('login') }}" style="margin-right: 20px;">
-                        Log in
-                    </a>
 
-                    @if (Route::has('register'))
-                    <a
-                        href="{{ route('register') }}">
-                        Register
-                    </a>
-                    @endif
-                    @endauth
-                    @endif
+
+                    <li>
+                        <a
+                            href="{{ route('register') }}">
+                            Register
+                        </a>
+                    </li>
+
+
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

@@ -51,8 +51,11 @@ class ProfileController extends Controller
                 ];
             });
 
+
+        $questionPackageCount = QuestionPackage::where('author_id', $id)->count();
+
         // Nếu tìm thấy người dùng và đúng ID, hiển thị profile
-        return view('client.pages.profile', compact('user', 'isOwner', 'publicPackages', 'nonPublicPackages', 'history'));
+        return view('client.pages.profile', compact('user', 'isOwner', 'publicPackages', 'nonPublicPackages', 'history', 'questionPackageCount'));
     }
 
 

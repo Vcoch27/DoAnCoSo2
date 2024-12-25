@@ -59,7 +59,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/profile.html">
+                <a class="nav-link text-white" href="{{ route('profile.show', ['id' => Auth::id()]) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
@@ -67,21 +67,29 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-in.html">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <a class="nav-link text-white" href="#" onclick="confirmLogout(event)">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">login</i>
                     </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
+                    <span class="nav-link-text ms-1">Log Out</span>
                 </a>
+
+                <script>
+                    function confirmLogout(event) {
+                        event.preventDefault(); // Ngăn hành động mặc định của thẻ <a>
+                        if (confirm('Are you sure you want to log out?')) {
+                            // Nếu người dùng nhấn "OK", gửi form logout
+                            document.getElementById('logout-form').submit();
+                        }
+                    }
+                </script>
+
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-up.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li>
+
         </ul>
     </div>
 

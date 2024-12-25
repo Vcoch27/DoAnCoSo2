@@ -60,6 +60,7 @@
     }
 </style>
 <div class="container-fluid py-4">
+
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -222,9 +223,8 @@
                         </div>
                         <hr class="hr-text " data-content="Update Subcription">
                         <form id="overlayForm" class="form-container" style="width: 80%; margin: 0 auto;">
-                            <input type="text" id="appTransId" class="form-control" disabled>
                             <div class="form-group">
-                                <label for="appTransId" class="form-label">appTransId</label>
+                                <label for="appTransId" class="form-label">Application Transaction ID</label>
                                 <input type="text" id="appTransId" class="form-control" disabled>
                             </div>
                             <div class="form-group">
@@ -346,6 +346,7 @@
                 const endDate = button.getAttribute('data-end-date');
                 const appTransId = button.getAttribute('data-app-trans-id');
 
+                console.log(appTransId)
                 // Điền dữ liệu vào các input trong overlay
                 document.getElementById('userName').value = userName;
                 document.getElementById('amount').value = amount;

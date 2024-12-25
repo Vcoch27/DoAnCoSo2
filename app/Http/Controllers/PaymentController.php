@@ -21,7 +21,13 @@ class PaymentController extends Controller
     public function showPremium()
     {
         $options = PremiumPlan::all();
-        return view('client/pages/premium', compact('options'));
+        $currentUser =  Auth::user()->id;
+        // Kiểm tra nếu người dùng hiện tại có bản ghi `UserPremiumSubscription` với status 'active'
+        $activeSubscription = UserPremiumSubscription::with('premiumPlan')->where('user_id', $currentUser)
+            ->where('status', 'active')
+            ->orderBy('start_date', 'desc')
+            ->first();
+        return view('client/pages/premium', compact('options', 'activeSubscription'));
     }
     public function pay(Request $request)
     {

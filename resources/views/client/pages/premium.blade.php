@@ -30,9 +30,54 @@
 
 @section('content')
 
-<!-- <pre>{{ json_encode($options, JSON_PRETTY_PRINT) }}</pre> -->
+<!-- <pre>{{ json_encode($activeSubscription, JSON_PRETTY_PRINT) }}</pre> -->
 <div class="container my-5">
+    @if (isset($activeSubscription))
+    <div class="card shadow-sm mb-4" style="width: 100%; max-width: 600px;max-height:400px; margin: auto;">
+        <div class="card-header text-center text-white" style="background-color: black;">
+            <h4 class="mb-0">Premium Subscription Details</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center mb-3">{{ $activeSubscription->premiumPlan->name }} Plan</h5>
+
+            <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>Status:</strong>
+                    <span class="badge badge-{{ $activeSubscription->status === 'active' ? 'success' : 'danger' }}">
+                        {{ ucfirst($activeSubscription->status) }}
+                    </span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>Duration:</strong>
+                    <span>{{ $activeSubscription->premiumPlan->duration }} months</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>Start Date:</strong>
+                    <span>{{ \Carbon\Carbon::parse($activeSubscription->start_date)->format('d/m/Y') }}</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>End Date:</strong>
+                    <span>{{ \Carbon\Carbon::parse($activeSubscription->end_date)->format('d/m/Y') }}</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>Time Remaining:</strong>
+                    <span>{{ round(\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($activeSubscription->end_date), false)) }} days</span>
+                </div>
+
+
+                <div class="list-group-item d-flex justify-content-between">
+                    <strong>Price:</strong>
+                    <span>{{ number_format($activeSubscription->amount, 0, ',', '.') }} VND</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+
     <div class="row justify-content-center">
+
+
         <!-- Free Plan Card -->
         <div class="col-md-4 mb-4">
             <div class="card text-center">
@@ -85,13 +130,19 @@
                         @csrf
                         <input type="hidden" name="option" value="{{ $options[0] }}">
 
-                        @if (!Auth::user()->isPremium)
+
+
+                        @if ($activeSubscription && ($activeSubscription->premium_plan_id === 1 || $activeSubscription->premium_plan_id === 2))
+                        <span class="btn btn-outline-success">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        @else
                         <button type="submit" class="btn btn-success">
                             Upgrade
                         </button>
-                        @else
-                        <span class="btn btn-outline-success"><i class="fa-solid fa-check"></i></span>
                         @endif
+
+
                     </form>
 
                     <hr>
@@ -124,12 +175,12 @@
                         @csrf
                         <input type="hidden" name="option" value="{{ $options[1] }}">
 
-                        @if (!Auth::user()->isPremium)
+                        @if ($activeSubscription && $activeSubscription->premium_plan_id === 2)
+                        <span class="btn btn-outline-success"><i class="fa-solid fa-check"></i></span>
+                        @else
                         <button type="submit" class="btn btn-success">
                             Upgrade
                         </button>
-                        @else
-                        <span class="btn btn-outline-success"><i class="fa-solid fa-check"></i></span>
                         @endif
                     </form>
                     <hr>

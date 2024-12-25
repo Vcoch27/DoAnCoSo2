@@ -116,8 +116,6 @@ class QuestionPackagesController extends Controller
             $correctAnswers = array_filter($question['correct_answers'], fn($correct) => $correct === "true");
             $correctKeys = array_keys($correctAnswers);
 
-
-
             // Lấy câu trả lời của người dùng cho câu hỏi hiện tại
             $userAnswerKeys = $userAnswers[$questionId] ?? ['0']; // Nếu không chọn, lấy giá trị mặc định là ['0']
 
@@ -192,8 +190,9 @@ class QuestionPackagesController extends Controller
 
 
         // Tính kết quả tổng thể
-        return view('client.pages.packages_result', compact('score', 'totalQuestions', 'resultDetails', 'package_title', 'package_id', 'cumulativePoints', 'new_daily_limit'));
+        return view('client.pages.packages_result', compact('score', 'questions', 'totalQuestions', 'resultDetails', 'package_title', 'package_id', 'cumulativePoints', 'new_daily_limit'));
     }
+    //tạo gói câu hỏi
     public function create(Request $request)
     {
         $tags = Tag::all();
@@ -508,8 +507,7 @@ class QuestionPackagesController extends Controller
 
         $packages = QuestionPackage::with(['tags', 'author'])
             ->where(function ($q) use ($query) {
-                $q->where('title', 'like', "%{$query}%")
-                    ->orWhere('description', 'like', "%{$query}%");
+                $q->where('title', 'like', "%{$query}%");
             })
             ->orWhereHas('tags', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");

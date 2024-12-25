@@ -28,6 +28,7 @@
       <a class="navbar-brand" href="/" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom">
         PROGACCUM
       </a>
+
       <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar top-bar"></span>
         <span class="navbar-toggler-bar middle-bar"></span>
@@ -36,6 +37,19 @@
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
       <ul class="navbar-nav">
+
+        <li class="nav-item">
+
+          <a class="nav-link" rel="tooltip" title=" Add packages" data-placement="bottom" href="{{'leaderboard'}}">
+            <i class="fa-solid fa-ranking-star"></i>
+            <span style="font-size: 13px;">Ranking</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title=" Add packages" data-placement="bottom" href="">
+            <span style="font-size: 13px;"><b>{{Auth::user()->cumulative}}</b> Points</span>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="{{ route('premium')}}" class="nav-link ">
             @if (Auth::user()->isPremium)

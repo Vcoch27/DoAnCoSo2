@@ -385,7 +385,7 @@ $owner = Auth::user()->id === $user->id;
                                 <div class="card-profile-stats d-flex justify-content-center">
 
                                     <div>
-                                        <span class="heading">10</span>
+                                        <span class="heading">{{$questionPackageCount}}</span>
                                         <span class="description">Packages</span>
                                     </div>
                                     <div>

@@ -66,7 +66,7 @@
 
 @section('content')
 <main class="main-content bg-pale-secondary">
-    <!-- <pre>{{ json_encode($package, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
+    <!-- <pre>{{ json_encode(json_decode($jsonData, true), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
 
     <div class="container">
         <div class="row bg-light">
@@ -152,12 +152,51 @@
 
 
                 <?php
-                $questions = json_decode($jsonData, true);
+                // Decode JSON into PHP array
+                $data = json_decode($jsonData, true);
+
+                // Shuffle questions
+                shuffle($data);
+
+                // Shuffle answers for each question while keeping correct_answers in sync
+                foreach ($data as &$question) {
+                    // Combine answers and correct_answers
+                    $answers = $question['answers'];
+                    $correctAnswers = $question['correct_answers'];
+                    $combined = [];
+
+                    foreach ($answers as $key => $value) {
+                        $combined[] = [
+                            'key' => $key,
+                            'answer' => $value,
+                            'is_correct' => $correctAnswers[$key],
+                        ];
+                    }
+
+                    // Shuffle combined answers
+                    shuffle($combined);
+
+                    // Reassign shuffled answers and correct_answers back to the question
+                    $question['answers'] = [];
+                    $question['correct_answers'] = [];
+                    foreach ($combined as $item) {
+                        $question['answers'][$item['key']] = $item['answer'];
+                        $question['correct_answers'][$item['key']] = $item['is_correct'];
+                    }
+                }
+                unset($question);
+
+                // Save the final shuffled questions to $questions
+                $questions = $data;
+
                 $numberOfQuestions = count($questions);
                 $counter = 1;
                 session(['questions' => $questions]);
                 ?>
-
+                <!-- <pre>{{ json_encode($questions, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
+                <!-- <?php foreach ($questions as $question): ?>
+                    <pre>{{ json_encode($question, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+                <?php endforeach ?> -->
 
                 <section class="section " id="question-container" style="display: none;">
                     <!-- <pre>{{ json_encode($questions, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre> -->
@@ -186,6 +225,7 @@
                         <form action="{{ route('submit.questions') }}" method='POST'>
                             @csrf
                             <?php foreach ($questions as $question): ?>
+
                                 <div name="Question<?php echo $counter; ?>" style="display: <?php if ($counter != 1) {
                                                                                                 echo 'none';
                                                                                             } else {
